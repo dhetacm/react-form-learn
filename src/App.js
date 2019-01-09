@@ -6,6 +6,7 @@ class App extends Component {
     return (
       <div>
         <h1>Let's create a React Form</h1>
+        <Register />
       </div>
     );
   }
