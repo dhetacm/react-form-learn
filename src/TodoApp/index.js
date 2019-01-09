@@ -4,7 +4,7 @@ class TodoApp extends Component {
   constructor() {
     super();
 
-    this.setState({
+    this.state = {
       input: "",
       todos: [
         {
@@ -16,16 +16,27 @@ class TodoApp extends Component {
           text: "Design TodoApp"
         }
       ]
-    });
+    };
   }
 
   handleTodoInput = event => {
-    this.setState({ nput: event.target.value });
+    this.setState({ input: event.target.value });
   };
 
   handleTodoSubmit = event => {
     event.preventDefault();
     console.log(this.state.input);
+
+    const newTodo = {
+      id: this.state.todos.length,
+      text: this.state.input
+    };
+    const newTodos = this.state.todos.concat(newTodo);
+
+    this.setState({
+      input: "",
+      todos: newTodos
+    });
   };
 
   render() {
@@ -35,12 +46,21 @@ class TodoApp extends Component {
         <form onSubmit={this.handleTodoSubmit}>
           <input
             type="text"
-            placeholder="Anything to do ?"
+            placeholder="Anything to do?"
             onChange={this.handleTodoInput}
             value={this.state.input}
           />
           <input type="submit" value="Add to do" />
         </form>
+        <ul>
+          {this.state.todos.map((todo, index) => {
+            return (
+              <li key={index}>
+                {todo.id}: {todo.text}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
