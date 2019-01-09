@@ -5,7 +5,31 @@ class Register extends Component {
     super();
 
     this.state = {
-      email: ""
+      email: "",
+      password: ""
     };
   }
+
+  handleEmailInput = event => {
+    this.setState({ email: event.target.value });
+  };
+
+  handlePasswordInput = event => {
+    this.setState({ password: event.target.value });
+  };
+
+  render() {
+    return (
+      <form>
+        <h3>Register</h3>
+        <label htmlFor="email">Email</label>
+        <input type="email" onChange={this.handleEmailInput} />
+        <label htmlFor="password">Password</label>
+        <input type="password" onChange={this.handlePasswordInput} />
+        <input type="submit" value="Register" />
+      </form>
+    );
+  }
 }
+
+export default Register;
