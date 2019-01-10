@@ -40,6 +40,19 @@ class TodoApp extends Component {
   };
 
   render() {
+    const todoList = this.state.todos.map((todo, index) => {
+      return (
+        <li key={index}>
+          {todo.id}: {todo.text}
+          <input
+            type="button"
+            value="Remove"
+            onClick={() => this.removeTodo(index)}
+          />
+        </li>
+      );
+    });
+
     return (
       <div>
         <h1>Todo App</h1>
@@ -52,15 +65,7 @@ class TodoApp extends Component {
           />
           <input type="submit" value="Add to do" />
         </form>
-        <ul>
-          {this.state.todos.map((todo, index) => {
-            return (
-              <li key={index}>
-                {todo.id}: {todo.text}
-              </li>
-            );
-          })}
-        </ul>
+        <ul>{todoList}</ul>
       </div>
     );
   }
