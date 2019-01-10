@@ -6,16 +6,8 @@ class TodoApp extends Component {
 
     this.state = {
       input: "",
-      todos: [
-        {
-          id: 0,
-          text: "Learn to make Todo"
-        },
-        {
-          id: 1,
-          text: "Design TodoApp"
-        }
-      ]
+      latestId: 0,
+      todos: []
     };
   }
 
@@ -25,16 +17,27 @@ class TodoApp extends Component {
 
   handleTodoSubmit = event => {
     event.preventDefault();
-    console.log(this.state.input);
 
+    const latestId = this.state.latestId;
     const newTodo = {
-      id: this.state.todos.length,
+      id: latestId,
       text: this.state.input
     };
     const newTodos = this.state.todos.concat(newTodo);
 
     this.setState({
       input: "",
+      latestId: latestId + 1,
+      todos: newTodos
+    });
+  };
+
+  removeTodo = indexToRemove => {
+    const newTodos = this.state.todos.filter((todo, index) => {
+      return index !== indexToRemove;
+    });
+
+    this.setState({
       todos: newTodos
     });
   };
